@@ -1,14 +1,15 @@
 <template>
+    <Head title="Inicio"/>
     <AppLayout>
-        <img src="storage/imagen1.png" class="w-full h-screen brightness-50 absolute object-cover top-0 z-0">
+        <img src="images/imagen1.png" class="w-full h-screen brightness-50 absolute object-cover top-0 z-0">
         <div class="container ">
             <div class="text-principal">
                 <h2 class="arsenica text-2xl lg:text-5xl w-full text-center" :style="{
                     color: '#F2D49B'
                 }">Expresa tu personalidad con</h2>
-                <!-- <StarIcon color="#fbfbfb" /> -->
+                <StarIcon color="#fbfbfb" />
                 <h3 class="atemporal !text-5xl lg:text-8xl">Atemporal</h3>
-                <!-- <StarIcon color="#fbfbfb" /> -->
+                <StarIcon color="#fbfbfb" />
                 <p class="px-4 text-center lg:px-0 lg:text-left">Queremos acercarte una exclusiva línea de accesorios
                     seleccionados para ser tu
                     complemento ideal en el
@@ -17,18 +18,25 @@
                     tu personalidad y estilo</p>
                 <div class="scroll">
                     Descubre más
-                    <!-- <ArrowDownIcon /> -->
+                    <ArrowDownIcon />
                 </div>
             </div>
+            <h1>hkslajlk</h1>
+            <h1>hkslajlk</h1>
+            <h1>hkslajlk</h1>
+            <h1>hkslajlk</h1>
+            <h1>hkslajlk</h1>
+            <h1>hkslajlk</h1>
+            <h1>hkslajlk</h1>
         </div>
     </AppLayout>
 </template>
 <script setup>
-// import ArrowDownIcon from '@/assets/icons/ArrowDownIcon.vue';
+import ArrowDownIcon from '@/Components/icons/ArrowDownIcon.vue';
 import AppLayout from '@/Layouts/AppLayout.vue';
 import Header from '@/Components/Header.vue';
 
-// import StarIcon from '@/assets/icons/StarIcon.vue';
+import StarIcon from '@/Components/icons/StarIcon.vue';
 
 </script>
 <style scoped>

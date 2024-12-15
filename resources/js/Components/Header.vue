@@ -1,9 +1,9 @@
 <script setup>
-// import MenuIcon from '@/assets/icons/MenuIcon.vue'
-// import SearchIcon from '@/assets/icons/SearchIcon.vue'
-// import CloseIcon from '@/assets/icons/CloseIcon.vue'
-// import ArrowSimpleIcon from '@/assets/icons/ArrowSimpleIcon.vue'
-// import CartIconVue from '@/assets/icons/CartIcon.vue'
+import MenuIcon from './icons/MenuIcon.vue'
+import SearchIcon from './icons/SearchIcon.vue'
+import CloseIcon from './icons/CloseIcon.vue'
+import ArrowSimpleIcon from './icons/ArrowSimpleIcon.vue'
+import CartIcon from './icons/CartIcon.vue'
 
 import { Link } from '@inertiajs/vue3';
 import { ref } from 'vue';
@@ -41,11 +41,9 @@ defineProps({
 <template>
     <header class="hidden lg:block">
         <div class="header-container">
-                <Link
-                    :href="route('home')"
-                >
-                    <h1 class="atemporal">Atemporal</h1>
-                </Link>
+            <Link :href="route('home')">
+            <h1 class="atemporal">Atemporal</h1>
+            </Link>
             <ul>
                 <li>Relojes</li>
                 <li>Accesorios </li>
@@ -54,47 +52,42 @@ defineProps({
                 <li>Accesorios</li>
             </ul>
             <ul>
-                
                 <!-- <nav v-if="canLogin" class="-mx-3 flex flex-1 justify-end"> -->
-                    <nav  class="-mx-3 flex flex-1 justify-end">
-                        <!-- <Link
-                            v-if="$page.props.auth.user"
-                            :href="route('dashboard')"
-                            class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                        > -->
-                        <!-- <Link
-                            :href="route('dashboard')"
-                            class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                        >
-                            Dashboard
-                        </Link> -->
+                <nav class="-mx-3 flex flex-1 justify-end">
+                    <div v-if="$page.props.auth.user">
+                        <Link :href="route('dashboard')"
+                            class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
 
-                        <!-- <template v-else> -->
-                        <div>
-                            <!-- <Link
+                        Dashboard
+                        </Link>
+                        <Link :href="route('logout')" method="post" as="button"
+                            class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
+
+                        Cerrar sesión
+                        </Link>
+                    </div>
+                    <!-- <template v-else> -->
+                    <div v-else>
+                        <!-- <Link
                                 :href="route('login')"
                                 class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
                             > -->
-                            <Link
-                                :href="route('login')"
-                                class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                            >
-                                Iniciar sesión
-                            </Link>
+                        <Link :href="route('login')"
+                            class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
+                        Iniciar sesión
+                        </Link>
 
-                            <!-- <Link
+                        <!-- <Link
                                 v-if="canRegister"
                                 :href="route('register')"
                                 class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
                             > -->
-                            <Link
-                                :href="route('register')"
-                                class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                            >
-                                Registrarme
-                            </Link>
-                        </div>
-                    </nav>
+                        <Link :href="route('register')"
+                            class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
+                        Registrarme
+                        </Link>
+                    </div>
+                </nav>
                 <!-- <a v-if="authStore.user != null" @click="authStore.logout">Cerrar sesión</a> -->
                 <!-- <router-link v-else :to="{ name: 'login' }">Iniciar sesión</router-link> -->
                 <!-- <RouterLink :to="{ name: 'cart' }">
@@ -123,7 +116,7 @@ defineProps({
         }">
             <input type="text" class="w-full p-2 pr-10 rounded-md text-primary">
             <!-- <CloseIcon color="fill-primary" :size="14" class="absolute top-1/2 right-3 -translate-y-1/2 " -->
-                <!-- @click="search = false" /> -->
+            <!-- @click="search = false" /> -->
         </div>
 
     </header>
@@ -157,7 +150,7 @@ defineProps({
                 class="w-full py-4 font-medium cursor-pointer transition-all hover:bg-primary/15">Cerrar sesión</a>
         </div> -->
         <!-- <div v-else class=" absolute w-full bottom-0 flex justify-between text-center"> -->
-            <!-- <router-link :to="{ name: 'register' }"
+        <!-- <router-link :to="{ name: 'register' }"
                 class="w-1/2 py-4  font-medium cursor-pointer transition-all  hover:bg-primary/15">Crear
                 cuenta</router-link>
             <router-link :to="{ name: 'login' }"

@@ -41,7 +41,7 @@ const submit = () => {
             </div>
 
             <form @submit.prevent="submit" class="bg-white  shadow-md rounded-xl px-8 pt-6 pb-8 mb-4 w-full max-w-xl">
-                <h1 class="mb-4 font-bold text-2xl text-stone-800">Iniciar sesión</h1>
+                <h2 class="mb-4 font-bold text-2xl text-stone-800">Iniciar sesión</h2>
                 <div>
                     <InputLabel for="email" value="Email:" />
 
@@ -74,11 +74,16 @@ const submit = () => {
                 <div class="mt-4 flex items-center justify-end">
 
                     <PrimaryButton
-                        class="bg-orange-900 w-full hover:bg-orange-800 text-white font-medium py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                        class="bg-orange-900 w-full hover:bg-orange-800 text-white font-medium py-2 px-4 rounded focus:outline-none focus:shadow-outline justify-center"
                         :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                         Ingresar
                     </PrimaryButton>
-                    
+
+                </div>
+                <div class="mt-2 flex justify-center">
+                    <Link :href="route('register')"
+                        class="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-orange-800 focus:ring-offset-2 ">
+                    No tengo una cuenta </Link>
                 </div>
             </form>
         </div>
