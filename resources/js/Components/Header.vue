@@ -7,6 +7,8 @@ import CartIcon from './icons/CartIcon.vue'
 
 import { Link } from '@inertiajs/vue3';
 import { ref } from 'vue';
+import Dropdown from './Dropdown.vue'
+import DropdownLink from './DropdownLink.vue'
 // import { useCartStore } from '@/stores/cartStore'
 // import { useAuthStore } from '@/stores/authStore'
 
@@ -14,8 +16,10 @@ import { ref } from 'vue';
 
 const menu = ref(false)
 const search = ref(false)
+const searchValue = ref('');
 // const store = useCartStore()
 
+const showingNavigationDropdown = ref(false);
 defineProps({
     saludo: {
         type: String,
@@ -39,6 +43,8 @@ defineProps({
 
 </script>
 <template>
+
+
     <header class="hidden lg:block">
         <div class="header-container">
             <Link :href="route('home')">
@@ -51,74 +57,83 @@ defineProps({
                 <li>Nosotros</li>
                 <li>Accesorios</li>
             </ul>
-            <ul>
-                <!-- <nav v-if="canLogin" class="-mx-3 flex flex-1 justify-end"> -->
-                <nav class="-mx-3 flex flex-1 justify-end">
-                    <div v-if="$page.props.auth.user">
-                        <Link :href="route('dashboard')"
-                            class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
+            <div class="">
+                <div class="max-w-7xl px-4 sm:px-6 lg:px-8 flex">
+                    <div class="hidden sm:ms-6 sm:flex sm:items-center">
+                        <!-- Settings Dropdown -->
+                        <div class="relative ms-3">
+                            <div v-if="!$page.props.auth.user">
+                                <Link :href="route('login')"
+                                    class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
+                                Iniciar sesión
+                                </Link>
 
-                        Dashboard
-                        </Link>
-                        <Link :href="route('logout')" method="post" as="button"
-                            class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
-
-                        Cerrar sesión
-                        </Link>
-                    </div>
-                    <!-- <template v-else> -->
-                    <div v-else>
-                        <!-- <Link
-                                :href="route('login')"
-                                class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                            > -->
-                        <Link :href="route('login')"
-                            class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
-                        Iniciar sesión
-                        </Link>
-
-                        <!-- <Link
+                                <!-- <Link
                                 v-if="canRegister"
                                 :href="route('register')"
                                 class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
                             > -->
-                        <Link :href="route('register')"
-                            class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
-                        Registrarme
-                        </Link>
+                                <Link :href="route('register')"
+                                    class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
+                                Registrarme
+                                </Link>
+                            </div>
+                            <Dropdown align="right" width="48" v-else>
+                                <template #trigger>
+                                    <span class="inline-flex rounded-md">
+                                        <button type="button"
+                                            class="inline-flex items-center rounded-md border border-transparent px-3 py-2 font-medium leading-4  transition duration-150 ease-in-out  focus:outline-none">
+                                            {{ $page.props.auth.user.name }}
+
+                                            <svg class="-me-0.5 ms-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 20 20" fill="currentColor">
+                                                <path fill-rule="evenodd"
+                                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+                                        </button>
+                                    </span>
+                                </template>
+
+                                <template #content>
+                                    <DropdownLink :href="route('dashboard')">
+                                        Panel administrativo
+                                    </DropdownLink>
+                                    <DropdownLink :href="route('profile.edit')">
+                                        Perfil
+                                    </DropdownLink>
+                                    <DropdownLink :href="route('logout')" method="post" as="button">
+                                        Cerrar sesión
+                                    </DropdownLink>
+                                </template>
+                            </Dropdown>
+                        </div>
                     </div>
-                </nav>
-                <!-- <a v-if="authStore.user != null" @click="authStore.logout">Cerrar sesión</a> -->
-                <!-- <router-link v-else :to="{ name: 'login' }">Iniciar sesión</router-link> -->
-                <!-- <RouterLink :to="{ name: 'cart' }">
-                    <CartIconVue />
-                    <span
-                        class="absolute -top-2 -right-2 rounded-full bg-red-600 flex items-center justify-center aspect-square w-5 text-center"
-                        style="font-size: .7rem; line-height: .7rem;">{{ store.quantityOfProducts }}</span>
-                </RouterLink> -->
-            </ul>
+                </div>
+            </div>
         </div>
     </header>
 
     <!-- HEADER MOBILE -->
-    <header class="lg:hidden !fixed top-0 left-0 justify-between items-center px-4 py-1 overflow-hidden transition-all">
-        <div class="flex justify-between w-full items-center">
-            <!-- <MenuIcon color="white" class="cursor-pointer w-1/12" @click="menu = !menu" /> -->
-            <!-- <RouterLink :to="{ name: 'home' }">
-                <h1 class="atemporal">Atemporal</h1>
-            </RouterLink> -->
-            <!-- <SearchIcon color="white" class="cursor-pointer" @click="search = !search" /> -->
-        </div>
-        <div class=" transition-all ease-linear origin-top overflow-hidden h-auto" :class="{
-            'scale-y-0 max-h-0 p-0': !search,
-            'scale-y-100 max-h-full py-1': search,
+    <header class="lg:hidden !fixed top-0 left-0 justify-between items-center px-4 py-1 overflow-hidden transition-all"
+        :class="{
+            'max-h-28': search,
+            'max-h-14': !search
 
         }">
-            <input type="text" class="w-full p-2 pr-10 rounded-md text-primary">
-            <!-- <CloseIcon color="fill-primary" :size="14" class="absolute top-1/2 right-3 -translate-y-1/2 " -->
-            <!-- @click="search = false" /> -->
+        <div class="flex justify-between w-full items-center">
+            <MenuIcon color="white" class="cursor-pointer w-1/12" @click="menu = !menu" />
+            <Link :href="{ name: 'home' }">
+            <h1 class="atemporal">Atemporal</h1>
+            </Link>
+            <SearchIcon color="white" class="cursor-pointer" @click="search = !search" />
         </div>
-
+        <div class=" transition-all ease-linear origin-top overflow-hidden h-auto py-1 my-1">
+            <input type="text" class="w-full p-2 pr-10 rounded-md text-black" v-model="searchValue">
+            <CloseIcon color="fill-primary" :size="14" class="absolute top-1/2 right-3 -translate-y-1/2 "
+                @click="e => searchValue = ''" />
+        </div>
+        <h1>{{ searchValue }}</h1>
     </header>
 
 
@@ -145,18 +160,23 @@ defineProps({
             <li class="font-medium w-full p-4 transition-all  hover:bg-primary/15">Contacto</li>
             <li class="font-medium w-full p-4 transition-all  hover:bg-primary/15">Ayuda</li>
         </ul>
-        <!-- <div v-if="authStore.user != null" class="absolute w-full bottom-0 flex justify-between text-center">
-            <a @click="authStore.logout"
-                class="w-full py-4 font-medium cursor-pointer transition-all hover:bg-primary/15">Cerrar sesión</a>
-        </div> -->
-        <!-- <div v-else class=" absolute w-full bottom-0 flex justify-between text-center"> -->
-        <!-- <router-link :to="{ name: 'register' }"
+        <div v-if="$page.props.auth.user != null" class="absolute w-full bottom-0 flex justify-between text-center">
+            <Link :href="route('profile.edit')"
+                class="border border-primary w-full py-4 font-medium cursor-pointer transition-all hover:bg-primary/15">Perfil</Link>
+            <Link :href="route('dashboard')"
+                class="border border-primary w-full py-4 font-medium cursor-pointer transition-all hover:bg-primary/15">Administrativo</Link>
+            <Link :href="route('logout')" as="button" method="post"
+                class="border border-primary w-full py-4 font-medium cursor-pointer transition-all hover:bg-primary/15">Cerrar sesión</Link>
+        </div>
+        <div v-else class=" absolute w-full bottom-0 flex justify-between text-center">
+            <Link :href="route('register')"
                 class="w-1/2 py-4  font-medium cursor-pointer transition-all  hover:bg-primary/15">Crear
-                cuenta</router-link>
-            <router-link :to="{ name: 'login' }"
-                class="w-1/2  py-4 font-medium cursor-pointer transition-all  hover:bg-primary/15">Iniciar
-                sesión</router-link> -->
-        <!-- </div> -->
+            cuenta</Link>
+            <Link :href="route('login')"
+                class="w-1/2  py-4 font-medium cursor-pointer transition-all  hover:bg-primary/15">
+            Iniciar
+            sesión</Link>
+        </div>
     </div>
     <div class="lg:hidden transition-all fixed top-0 left-0 h-dvh w-full z-40" :class="{
         'bg-black/50 block': menu,

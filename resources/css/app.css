@@ -169,6 +169,20 @@ h2 {
     font-size: 1.7rem;
 }
 
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.btn-red {
+    @apply text-white px-2 py-2 bg-red-600 rounded-md;
+}
 
 @media (max-width: 1024px) {
     .container {

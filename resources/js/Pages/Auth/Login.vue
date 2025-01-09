@@ -31,9 +31,9 @@ const submit = () => {
 </script>
 
 <template>
+    <Head title="Iniciar sesión" />
     <ContainedLayout>
 
-        <Head title="Iniciar sesión" />
         <div class="min-h-screen flex items-center justify-center">
 
             <div v-if="status" class="mb-4 text-sm font-medium text-green-600">

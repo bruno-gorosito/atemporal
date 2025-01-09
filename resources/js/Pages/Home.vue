@@ -1,6 +1,6 @@
 <template>
-    <Head title="Inicio"/>
     <AppLayout>
+        <Head title="Inicio" />
         <img src="images/imagen1.png" class="w-full h-screen brightness-50 absolute object-cover top-0 z-0">
         <div class="container ">
             <div class="text-principal">
@@ -29,15 +29,17 @@
             <h1>hkslajlk</h1>
             <h1>hkslajlk</h1>
         </div>
+        <Checkout />
+        
     </AppLayout>
 </template>
 <script setup>
 import ArrowDownIcon from '@/Components/icons/ArrowDownIcon.vue';
 import AppLayout from '@/Layouts/AppLayout.vue';
 import Header from '@/Components/Header.vue';
-
+import { Head } from '@inertiajs/vue3';
 import StarIcon from '@/Components/icons/StarIcon.vue';
-
+import Checkout from '@/Components/mercadoPago/Checkout.vue'
 </script>
 <style scoped>
 .text-principal {
