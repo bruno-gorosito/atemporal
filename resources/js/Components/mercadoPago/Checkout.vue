@@ -8,7 +8,7 @@
 <script>
 import { onMounted, ref } from 'vue';
 
-const mp = new MercadoPago('APP_USR-230422d5-b5c0-473e-b5ca-265700ec7c56', {
+const mp = new MercadoPago('iddeapp', { 
     locale: 'es-AR'
 });
 
